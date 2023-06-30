@@ -12,11 +12,7 @@ public class Main {
         }
     }
     public static int sum(int floor, int number){
-        if(floor == 0) return number;
-        int res = 0;
-        for(int i=1; i<=number; i++){
-            res += sum(floor-1, i);
-        }
-        return res;
+        if(floor == 0 || number == 1) return number;
+        return sum(floor, number-1) + sum(floor-1, number);
     }
 }

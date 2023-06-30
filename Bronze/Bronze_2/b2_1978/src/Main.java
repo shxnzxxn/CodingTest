@@ -18,6 +18,7 @@ public class Main {
                     break;
                 }
             }
+
             if(isPrime) cnt++;
         }
         System.out.println(cnt);
