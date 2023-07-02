@@ -16,25 +16,16 @@ public class Main {
             if (!input.contains(tmp)) input.add(tmp);
         }
         Collections.sort(input);
-
         res.add(input.get(0));
+
         for (int i = 1; i < input.size(); i++) {
             String obj = input.get(i);
             if(obj.length() < res.get(res.size()-1).length()) {
                 for (int j = 0; j < res.size(); j++) {
-                    if (obj.length() < res.get(j).length()){
-                        res.add(j, obj);
-                        break;
-                    }
+                    if (obj.length() < res.get(j).length()){res.add(j, obj); break;}
                 }
-            }else{
-                res.add(obj);
-            }
+            }else res.add(obj);
         }
-
-        for(int i=0; i<res.size(); i++){
-            System.out.println(res.get(i));
-        }
-
+        for(int i=0; i<res.size(); i++) System.out.println(res.get(i));
     }
 }
