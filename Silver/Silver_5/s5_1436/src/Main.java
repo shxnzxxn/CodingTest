@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -9,6 +10,7 @@ public class Main {
         // 3. 우선 늘려가는 변수를 idx라고 한다면 이 수를 x앞에 붙여준다.
         // 4. 그리고 해당 수에서 연속된 6이 나오기 시작한 부분까지를 제외하고 남은 수를 뒤에 채워준다.
         // 6. 그 후에, 다시 idx를 늘려가면서 카운트하자.
+
         int cnt = 0;
         String res = "";
         for(int i=0; cnt < num; i++){ // 1, 2단계
