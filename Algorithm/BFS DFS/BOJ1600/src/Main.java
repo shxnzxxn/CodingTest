@@ -10,9 +10,9 @@ public class Main {
     static int m;
     static int n;
     static int move = 200*200+1;
-    static int[] dx = {-1, 1, 0, 0};
+    static int[] dx = {-1, 1, 0, 0}; // 원숭이의 기본 이동
     static int[] dy = {0, 0, -1, 1};
-    static int[] dxHorse = {-1, -2, -2, -1, 1, 2, 2, 1};
+    static int[] dxHorse = {-1, -2, -2, -1, 1, 2, 2, 1}; // 원숭이가 말처럼 이동할 때
     static int[] dyHorse = {-2, -1, 1, 2, -2, -1, 1, 2};
 
     public static void main(String[] args) throws IOException {
@@ -24,7 +24,7 @@ public class Main {
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
 
-        int[][] input = new int[m][n]; // k까지 부식 수 있으니까! k번째에 오면 이제 더이상 부실 수 없다는 소리!
+        int[][] input = new int[m][n];
         for(int i=0; i<m; i++){
             st = new StringTokenizer(br.readLine());
             for(int j=0; j<n; j++){
@@ -33,16 +33,15 @@ public class Main {
         }
 
         BFS(input);
-        int res = move == 200*200+1 ? -1 : move;
+        int res = move == 200*200+1 ? -1 : move; // move가 갱신되지 않으면, -1로 출력해야함.
         System.out.println(res);
     }
 
     private static void BFS(int[][] input) {
         boolean[][][] visited = new boolean[m][n][k+1];
         Queue<int[]> q = new LinkedList<>();
-        q.add(new int[]{0, 0, 0, 0}); // x, y, distance, break 횟수
+        q.add(new int[]{0, 0, 0, 0}); // (x, y, distance, 말의 이동을 따라한 횟수)
         visited[0][0][0] = true;
-
 
         while (!q.isEmpty()) {
             int[] tmp = q.poll();
@@ -51,23 +50,20 @@ public class Main {
             int dis = tmp[2];
             int power = tmp[3];
 
-
-            if(x == m-1 && y == n-1){
-                move = Math.min(move, dis);
-            }
+            if(x == m-1 && y == n-1) move = Math.min(move, dis);
 
             for(int i=0; i< dx.length; i++){
                 int xNew = x + dx[i];
                 int yNew = y + dy[i];
 
-                if(xNew >= 0 && xNew < m && yNew >= 0 && yNew < n){
+                if(xNew >= 0 && xNew < m && yNew >= 0 && yNew < n){ // 원숭이가 기본으로 이동할 때,
                     if((input[xNew][yNew] == 0) && !visited[xNew][yNew][power]){
                         visited[xNew][yNew][power] = true;
                         q.add(new int[]{xNew, yNew, dis+1, power});
                     }
                 }
             }
-            if(power < k) { // 아직 뛰어넘을 수 있다!!
+            if(power < k) { // 아직 말의 이동을 따라할 수 있다!!
                 for(int i = 0;  i< dxHorse.length; i++){
                     int xNew = x + dxHorse[i];
                     int yNew = y + dyHorse[i];
@@ -80,8 +76,6 @@ public class Main {
                     }
                 }
             }
-
         }
-
     }
 }
