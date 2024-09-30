@@ -1,5 +1,5 @@
 # intelliJ project file
-.idea
+./.idea
 *.iml
 out
 .DS_Store
